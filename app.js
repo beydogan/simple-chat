@@ -18,12 +18,25 @@ function handler (req, res) {
     res.end(data);
   });
 }
-redis = require("redis");
+	redis = require("redis");
 
-var pub = redis.createClient();
+if (process.env.REDISTOGO_URL) {
+	var rtg   = require("url").parse(process.env.REDISTOGO_URL);
+	var pub = require("redis").createClient(rtg.port, rtg.hostname);
+	
+	pub.auth(rtg.auth.split(":")[1]);
+} else {
+	var pub = redis.createClient();
+}
 
 io.sockets.on('connection', function (client) {
-	var sub = redis.createClient();
+	if (process.env.REDISTOGO_URL) {
+		var sub = require("redis").createClient(rtg.port, rtg.hostname);
+	
+		sub.auth(rtg.auth.split(":")[1]);
+	} else {
+		var sub = redis.createClient();
+	}
 
 	console.log("CLIENT CONNECTED!")
 
