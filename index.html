@@ -1,0 +1,62 @@
+<html>
+<head>
+    <title>EmrChat</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+</head>
+<body>
+	<div class="login">
+
+		<div id="username">
+			User:<input type="text" name="usernameTxt" /> 
+		</div>
+		<div id="channel">
+			Channel:<input type="text" name="channel" /> <input type="button" name="setUsername" value="$$$" />
+		</div>
+	</div>
+	<div id="sendChat" style="display:none;">
+		Chat:<input type="text" name="chatTxt" /> <input type="button" name="sendBtn" value="Send" />
+	</div>
+	<br />
+    <div id="content"></div>
+    <script>    
+        $(document).ready(function() {
+			var username = "anonymous";
+			
+			$('input[name=setUsername]').click(function(){
+				if($('input[name=usernameTxt]').val() != ""){
+					username = $('input[name=usernameTxt]').val();
+					channel = $('input[name=channel]').val();
+					var msg = {type:'setUsername',user:username, kanal: channel};
+					socket.json.send(msg);
+				}
+				$('.login').slideUp("slow",function(){
+					$('#sendChat').slideDown("slow");
+				});
+			});
+			
+            var socket = new io.connect('http://3b25c0cd.ngrok.com');
+            var content = $('#content');
+
+            socket.on('connect', function() {
+				console.log("Connected");
+            });
+
+            socket.on('message', function(message){
+                content.append(message + '<br />');
+            }) ;
+
+            socket.on('disconnect', function() {
+                console.log('disconnected');
+                content.html("<b>Disconnected!</b>");
+            });
+
+			$("input[name=sendBtn]").click(function(){
+				var msg = {type:'chat', user: username, kanal: channel, message:username + " : " +  $("input[name=chatTxt]").val()}
+				socket.json.send(msg);
+				$("input[name=chatTxt]").val("");
+			});
+        });
+    </script>
+</body>
+</html>
