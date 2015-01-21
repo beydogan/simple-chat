@@ -35,7 +35,8 @@
 				});
 			});
 			
-            var socket = new io.connect('http://soru-simple-chat.herokuapp.com');
+            //var socket = new io.connect('http://soru-simple-chat.herokuapp.com');
+            var socket = new io.connect(window.location.origin);
             var content = $('#content');
 
             socket.on('connect', function() {
