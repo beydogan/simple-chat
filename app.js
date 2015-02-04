@@ -41,6 +41,7 @@ io.sockets.on('connection', function (client) {
 	console.log("CLIENT CONNECTED!")
 
 	sub.on("message", function (channel, message) {
+		console.log(message)
 		console.log("RECEIVED CHANNEL:" +channel);
 		client.send(message);
 	});
@@ -49,13 +50,13 @@ io.sockets.on('connection', function (client) {
 		console.log("=====START=====")
 	    console.log(msg);
 	    if(msg.type == "chat"){
-	        pub.publish("kanal:" + msg.kanal, msg.message);
+	        pub.publish("CHAT:" + msg.kanal, msg.message);
 	    }
 	    else if(msg.type == "setUsername"){
 	    	console.log("SUB= CH:" + msg.kanal)
 			client.send("SELAM");
-			sub.subscribe("kanal:" + msg.kanal);
-			pub.publish("kanal:" + msg.kanal, "CONNECTED USER");
+			sub.subscribe("CHAT:" + msg.kanal);
+			pub.publish("CHAT:" + msg.kanal, "CONNECTED USER");
 	    }
 
 	    console.log("=====END=====")
