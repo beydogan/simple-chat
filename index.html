@@ -53,11 +53,30 @@
             });
 
 			$("input[name=sendBtn]").click(function(){
+				sendMessage();
+			});
+
+			$("input[name=chatTxt]").enterKey(function(){
+				sendMessage();
+			})
+
+			var sendMessage = function(){
 				var msg = {type:'chat', user: username, kanal: channel, message:username + " : " +  $("input[name=chatTxt]").val()}
 				socket.json.send(msg);
 				$("input[name=chatTxt]").val("");
-			});
+			}
         });
+
+		$.fn.enterKey = function (fnc) {
+		    return this.each(function () {
+		        $(this).keypress(function (ev) {
+		            var keycode = (ev.keyCode ? ev.keyCode : ev.which);
+		            if (keycode == '13') {
+		                fnc.call(this, ev);
+		            }
+		        })
+		    })
+		}
     </script>
 </body>
 </html>
