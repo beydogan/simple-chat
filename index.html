@@ -84,11 +84,11 @@
             var content = $('#content');
 
             socket.on('connect', function() {
-				console.log("Connected");
+                //addMessage("Connected");
             });
 
             socket.on('message', function(message){
-                content.append(message + '<br />');
+                addMessage(message);
             }) ;
 
             socket.on('disconnect', function() {
@@ -103,6 +103,10 @@
 			$("input[name=chatTxt]").enterKey(function(){
 				sendMessage();
 			})
+
+			var addMessage = function(msg){
+                content.append(msg + '<br />');
+			}
 
 			var sendMessage = function(){
 				var msg = {type:'chat', user: username, kanal: channel, message:username + " : " +  $("input[name=chatTxt]").val()}
