@@ -18,6 +18,15 @@
     	position: absolute;
     	margin-bottom: 10px;
     }
+
+    #content{
+    	background: #343434;
+		height: 300px;
+		margin: 15px;
+		padding: 10px;
+		border: 1px solid #373535;
+		color: #6ED300;
+    }
     </style>
 </head>
 <body>
@@ -48,7 +57,7 @@
 	</div>
 
 	<br />
-    <div id="content"></div>
+    <div id="content"  style="display:none;"></div>
 
 
 	<div class="container-fluid chat-area" id="sendChat" style="display:none;">
@@ -56,9 +65,9 @@
 			<div class="col-md-12">
 				<div class="input-group">
 					<input type="text" name="chatTxt" class="form-control" placeholder="Type..."/> 
-			      <span class="input-group-btn">
-			        <button class="btn btn-success" id="sendBtn" type="button">Send</button>
-			      </span>
+					<span class="input-group-btn">
+						<button class="btn btn-success" id="sendBtn" type="button">Send</button>
+					</span>
 			    </div><!-- /input-group -->
 			</div>
 		</div>
@@ -75,6 +84,7 @@
 					socket.json.send(msg);
 				}
 				$('.login').slideUp("slow",function(){
+					$("#content").show()
 					$('#sendChat').slideDown("slow");
 				});
 			});
