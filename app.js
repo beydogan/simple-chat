@@ -32,7 +32,6 @@ if (process.env.REDISTOGO_URL) {
 io.sockets.on('connection', function (client) {
 	if (process.env.REDISTOGO_URL) {
 		var sub = require("redis").createClient(rtg.port, rtg.hostname);
-	
 		sub.auth(rtg.auth.split(":")[1]);
 	} else {
 		var sub = redis.createClient();
@@ -54,7 +53,7 @@ io.sockets.on('connection', function (client) {
 	    }
 	    else if(msg.type == "setUsername"){
 	    	console.log("SUB= CH:" + msg.kanal)
-			client.send("SELAM");
+			client.send("SYS:NEWUSER");
 			sub.subscribe("CHAT:" + msg.kanal);
 			pub.publish("CHAT:" + msg.kanal, "CONNECTED USER");
 	    }
