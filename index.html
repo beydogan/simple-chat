@@ -6,7 +6,17 @@
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.2/flatly/bootstrap.min.css">
     <style>
     .login-form{
-    	margin-top: 150px;
+    	margin-top: 20px;
+    }
+
+    .login{
+    	padding-top: 100px;
+    }
+
+    #sendChat{
+    	bottom:0;
+    	position: absolute;
+    	margin-bottom: 10px;
     }
     </style>
 </head>
@@ -36,11 +46,23 @@
 			</div>
 		</div>
 	</div>
-	<div id="sendChat" style="display:none;">
-		Chat:<input type="text" name="chatTxt" /> <input type="button" name="sendBtn" value="Send" />
-	</div>
+
 	<br />
     <div id="content"></div>
+
+
+	<div class="container-fluid chat-area" id="sendChat" style="display:none;">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="input-group">
+					<input type="text" name="chatTxt" class="form-control"/> 
+			      <span class="input-group-btn">
+			        <button class="btn btn-success" id="sendBtn" type="button">Send</button>
+			      </span>
+			    </div><!-- /input-group -->
+			</div>
+		</div>
+	</div>
     <script>    
         $(document).ready(function() {
 			var username = "anonymous";
@@ -74,7 +96,7 @@
                 content.html("<b>Disconnected!</b>");
             });
 
-			$("input[name=sendBtn]").click(function(){
+			$("#sendBtn").click(function(){
 				sendMessage();
 			});
 
