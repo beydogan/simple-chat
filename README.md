@@ -7,7 +7,7 @@ simple chat application backend with socket.io and node.js
 
 git clone git@github.com:beydogan/simple-chat.git
 cd simple-chat
-nodejs app.s
+nodejs app.js
 
 ```
 
