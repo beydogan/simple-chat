@@ -1,5 +1,5 @@
 # simple-chat
-simple chat application backend with socket.io and node.js
+simple chat application with channels built with socket.io and node.js
 
 # Usage
 
