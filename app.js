@@ -42,21 +42,24 @@ io.sockets.on('connection', function (client) {
 	sub.on("message", function (channel, message) {
 		console.log(message)
 		console.log("RECEIVED CHANNEL:" +channel);
-		client.send(message);
+		client.emit("message", "fdsafdsa");
 	});
 
 	client.on("message", function (msg) {
 		console.log("=====START=====")
 	    console.log(msg);
+	    //sub.subscribe("CHAT:52");
+	    //pub.publish("CHAT:52", "fdskkfdsa");
 	    if(msg.type == "chat"){
 	        pub.publish("CHAT:" + msg.kanal, msg.message);
 	    }
-	    else if(msg.type == "setUsername"){
-	    	console.log("SUB= CH:" + msg.kanal)
-			client.send("SYS:NEWUSER");
+	    else if(msg.type == "connectChat"){
+	    	console.log("CONNECT CHAT")
+	    	console.log("#############")
 			sub.subscribe("CHAT:" + msg.kanal);
 			pub.publish("CHAT:" + msg.kanal, "CONNECTED USER");
 	    }
+
 
 	    console.log("=====END=====")
 	});

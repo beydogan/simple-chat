@@ -81,7 +81,7 @@
 				if($('input[name=usernameTxt]').val() != ""){
 					username = $('input[name=usernameTxt]').val();
 					channel = $('input[name=channel]').val();
-					var msg = {type:'setUsername',user:username, kanal: channel};
+					var msg = {type:'connectChat',user:username, kanal: channel};
 					socket.json.send(msg);
 				}
 				$('.login').slideUp("slow",function(){
