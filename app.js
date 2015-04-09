@@ -51,7 +51,7 @@ io.sockets.on('connection', function (client) {
 	    //sub.subscribe("CHAT:52");
 	    //pub.publish("CHAT:52", "fdskkfdsa");
 	    if(msg.type == "chat"){
-	        pub.publish("CHAT:" + msg.kanal, msg.message);
+	        pub.publish("CHAT:" + msg.kanal, msg);
 	    }
 	    else if(msg.type == "connectChat"){
 	    	console.log("CONNECT CHAT")
