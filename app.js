@@ -42,7 +42,7 @@ io.sockets.on('connection', function (client) {
 	sub.on("message", function (channel, message) {
 		console.log(message)
 		console.log("RECEIVED CHANNEL:" +channel);
-		client.emit("message", "fdsafdsa");
+		client.emit("message", message);
 	});
 
 	client.on("message", function (msg) {
