@@ -42,7 +42,7 @@ io.sockets.on('connection', function (client) {
 	sub.on("message", function (channel, message) {
 		console.log(message)
 		console.log("RECEIVED CHANNEL:" +channel);
-		client.emit("message", "fdsafdsa");
+		client.emit("message", JSON.stringify(message));
 	});
 
 	client.on("message", function (msg) {
@@ -51,13 +51,13 @@ io.sockets.on('connection', function (client) {
 	    //sub.subscribe("CHAT:52");
 	    //pub.publish("CHAT:52", "fdskkfdsa");
 	    if(msg.type == "chat"){
-	        pub.publish("CHAT:" + msg.kanal, msg.message);
+	        pub.publish("CHAT:" + msg.kanal, JSON.stringify(msg));
 	    }
 	    else if(msg.type == "connectChat"){
 	    	console.log("CONNECT CHAT")
 	    	console.log("#############")
 			sub.subscribe("CHAT:" + msg.kanal);
-			pub.publish("CHAT:" + msg.kanal, "CONNECTED USER");
+			//pub.publish("CHAT:" + msg.kanal, "CONNECTED USER");
 	    }
 
 

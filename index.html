@@ -120,7 +120,7 @@
 			}
 
 			var sendMessage = function(){
-				var msg = {type:'chat', user: username, kanal: channel, message:username + " : " +  $("input[name=chatTxt]").val()}
+				var msg = {type:'chat', user: username, kanal: channel, message:username + " " +  $("input[name=chatTxt]").val()}
 				socket.json.send(msg);
 				$("input[name=chatTxt]").val("");
 			}
