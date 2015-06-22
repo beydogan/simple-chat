@@ -41,30 +41,23 @@ io.sockets.on('connection', function (client) {
 
 	sub.on("message", function (channel, message) {
 		console.log(message)
-		console.log("RECEIVED CHANNEL:" +channel);
+		console.log("L44 RECEIVED CHANNEL:" +channel);
 		client.emit("message", JSON.stringify(message));
 	});
 
 	client.on("message", function (msg) {
 		console.log("=====START=====")
-	    console.log(msg);
-	    //sub.subscribe("CHAT:52");
-	    //pub.publish("CHAT:52", "fdskkfdsa");
-	    if(msg.type == "chat"){
-	        pub.publish("CHAT:" + msg.kanal, JSON.stringify(msg));
+	    if(msg.type == "chat_message"){
+	        pub.publish("USER:" + msg.user_id, JSON.stringify(msg));
+	    }else if(msg.type == "user_connect"){
+	    	console.log("CONNECT CHAT L54")
+			sub.subscribe("USER:" + msg.user_id);
 	    }
-	    else if(msg.type == "connectChat"){
-	    	console.log("CONNECT CHAT")
-	    	console.log("#############")
-			sub.subscribe("CHAT:" + msg.kanal);
-			//pub.publish("CHAT:" + msg.kanal, "CONNECTED USER");
-	    }
-
-
 	    console.log("=====END=====")
 	});
 
 	client.on('disconnect', function () {
+	    console.log("=====CLIENT DISCONNECT=====")
 	    sub.quit();
 	});
 	 
