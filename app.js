@@ -31,8 +31,7 @@ if (process.env.REDISTOGO_URL) {
 
 io.sockets.on('connection', function (client) {
 	if (process.env.REDISTOGO_URL) {
-		var sub = require("redis").createClient(rtg.port, rtg.hostname);
-		sub.auth(rtg.auth.split(":")[1]);
+		var sub = require("redis").createClient("6379", process.env.REDISTOGO_URL);
 	} else {
 		var sub = redis.createClient();
 	}
