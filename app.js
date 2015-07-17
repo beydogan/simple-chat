@@ -21,10 +21,10 @@ function handler (req, res) {
 	redis = require("redis");
 
 if (process.env.REDISTOGO_URL) {
-	var rtg   = require("url").parse(process.env.REDISTOGO_URL);
-	var pub = require("redis").createClient(rtg.port, rtg.hostname);
+	//console.log()
+	var pub = require("redis").createClient("6379", process.env.REDISTOGO_URL);
 	
-	pub.auth(rtg.auth.split(":")[1]);
+	//pub.auth(rtg.auth.split(":")[1]);
 } else {
 	var pub = redis.createClient();
 }
